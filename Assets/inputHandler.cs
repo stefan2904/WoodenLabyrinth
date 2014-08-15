@@ -8,12 +8,16 @@ public class inputHandler : MonoBehaviour {
 	public GUIText winText;
 	private int cnt;
 
-	private bool NOANDROID;
+	public bool ANDROID;
+	private bool onAndroid;
 
 	void Start() {
-		NOANDROID = Application.platform != RuntimePlatform.Android;
+		onAndroid = Application.platform == RuntimePlatform.Android || ANDROID;
+		if(onAndroid) print ("Controls set to Android mode ...");
+		else print ("Controls set to PC mode ...");
 
-		cnt = 15;
+		cnt = GameObject.FindGameObjectsWithTag("PickUp").Length;
+		print("Game loaded! There are " + cnt + " PickUps ...");
 		UpdateCounterText();
 	}
 
@@ -27,7 +31,7 @@ public class inputHandler : MonoBehaviour {
 		float move_vert = -Input.acceleration.x; //-1 * Input.GetAxis ("Horizontal");
 		float move_hori = Input.acceleration.y; //Input.GetAxis ("Vertical");
 
-		if(NOANDROID || (move_vert == 0 && move_vert == 0)) {
+		if(!onAndroid || (move_vert == 0 && move_vert == 0)) {
 			move_vert = -1 * Input.GetAxis ("Horizontal");
 			move_hori = Input.GetAxis ("Vertical");
 		}
@@ -59,7 +63,7 @@ public class inputHandler : MonoBehaviour {
 	}
 
 	void UpdateCounterText() {
-		counterText.text = "Count: " + cnt;
+		counterText.text = "Pickups left: " + cnt;
 	}
 
 }
