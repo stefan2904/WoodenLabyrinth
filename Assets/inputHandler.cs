@@ -11,10 +11,16 @@ public class inputHandler : MonoBehaviour {
 	private bool NOANDROID;
 
 	void Start() {
-		NOANDROID = false; //Application.platform != RuntimePlatform.Android;
+		NOANDROID = Application.platform != RuntimePlatform.Android;
 
 		cnt = 15;
 		UpdateCounterText();
+	}
+
+	void Update() {
+		// quits app on back button on Android:
+		if (Input.GetKeyDown(KeyCode.Escape))
+			Application.Quit(); 
 	}
 
 	void FixedUpdate() {
