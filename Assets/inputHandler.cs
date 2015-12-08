@@ -38,7 +38,7 @@ public class inputHandler : MonoBehaviour {
 
 		Vector3 mov = new Vector3(move_hori, 0, move_vert);
 
-		rigidbody.AddForce (mov * speed * Time.deltaTime);
+		GetComponent<Rigidbody>().AddForce (mov * speed * Time.deltaTime);
 
 	}
 
